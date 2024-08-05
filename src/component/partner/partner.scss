@@ -43,7 +43,8 @@
     top: 0;
     right: 0;
     width: 23px;
-    height: 24px;
+    height: auto;
+    max-width: 15%;
 
     &--close{
       display: none;
