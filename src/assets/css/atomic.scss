@@ -1,0 +1,33 @@
+.f_row_ctr{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.f_col_ctr{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.img{
+  line-height: 0;
+  display: inline-block;
+  width: 100%;
+}
+
+.icon{
+  line-height: 0;
+  display: inline-block;
+  & img{
+    width: 100%;
+  }
+
+  & svg{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+

@@ -1,0 +1,31 @@
+.button{
+	--background-color: #EEA030;
+	--border-color: #E7E8E9;
+
+
+	position: relative;
+	display: inline-block;
+
+	height : 60px;
+	padding: 0 36px;
+
+	font-family : 'Helvetica', sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 60px;
+
+
+	border-radius: 100px;
+	box-sizing: border-box;
+
+	&--colored{
+		background-color: var(--background-color) ;
+		color: #0D0D0D;
+	}
+
+	&--bordered{
+		background-color: transparent;
+		border: 1px solid var(--border-color);
+		color: var(--border-color) ;
+	}
+}

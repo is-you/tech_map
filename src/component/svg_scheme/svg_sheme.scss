@@ -1,0 +1,137 @@
+.svg_content{
+  text-rendering: optimizeSpeed;
+  user-select: none;
+
+  &--1{
+    --color: #B2AF9B;
+  }
+  &--2{
+    --color: #B8A4AF;
+  }
+  &--3{
+    --color: #A6B3BB;
+  }
+  &--4{
+    --color: #BDBCBC;
+  }
+  &--5{
+    --color: #C6C2A5;
+  }
+  &--6{
+    --color: #BDB5DA;
+  }
+  &--7{
+    --color: #98D1CB;
+  }
+  &--8{
+    --color: #AEC2CE;
+  }
+  &--9{
+    --color: #C4BAC0;
+  }
+  &--10{
+    --color: #A2C3D6;
+  }
+  &--11{
+    --color: #D0CEBC;
+  }
+  &--12{
+    --color: #A8A8A7;
+  }
+
+}
+
+.text{
+  fill:#0E4A7D;
+  white-space: pre;
+  font-family: CeraPro, sans-serif;
+  font-size:16.1px;
+  letter-spacing:-0.002em;
+}
+
+.number{
+  font-family: CeraPro, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0;
+}
+
+.number_title{
+  font-family: CeraPro, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.root_title{
+  fill:#0E4A7D;
+  white-space: pre;
+  font-family: CeraPro, sans-serif;
+  font-size:17.1px;
+  letter-spacing:0.002em;
+}
+
+.scheme{
+  overflow: hidden;
+
+  padding: calc(var(--size) + 80px) 40px calc(var(--size) / 2) 40px;
+}
+
+.scheme_wrapper{
+  position: relative;
+}
+
+.svg_layer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  pointer-events: none;
+}
+
+.p{
+  stroke: var(--color);
+}
+
+.e{
+  fill: var(--color);
+}
+
+.root, .root_title, .text{
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+
+.active_section .root_title, .active_company .root_title{
+  fill: red;
+}
+
+.active_section .p, .active_company .root .p, .active_company .company.active .p{
+  stroke: red;
+}
+
+.active_section .e, .active_company .root .e, .active_company .company.active .e{
+  fill: red;
+}
+
+.active_section .company .text{
+  fill: red;
+}
+
+.active_company .company.active .text{
+  fill: red;
+}
+
+.zoom_shade{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  .js--zoom_mode &{
+    z-index: 2;
+  }
+}

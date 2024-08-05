@@ -1,0 +1,44 @@
+@mixin pseudo($top:0, $left:0) {
+  position: absolute;
+  content: "";
+  top: $top;
+  left: $left;
+}
+
+@mixin ab_full($mr: 0){
+  position: absolute;
+  top: $mr;
+  bottom: $mr;
+  right: $mr;
+  left: $mr;
+}
+
+@mixin p($lh: var(--line-height-P)) {
+  font-size: var(--font-size-P);
+  line-height: $lh;
+  font-weight: 400;
+  text-align: center;
+}
+
+@mixin content_positioning(){
+  width: var(--content_width);
+  margin-left: var(--margin_content);
+}
+
+@mixin icon-before($mr: 0) {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: $mr;
+}
+
+@mixin padding-block(){
+  width      : 100%;
+  padding    : 0 var(--padding-Content) ;
+  box-sizing: border-box;
+}
+
+@mixin content(){
+
+}
+

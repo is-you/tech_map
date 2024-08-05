@@ -1,0 +1,28 @@
+html, body, div, span, object,
+h1,h2, h3, h3, h4, h5, h6, p, pre, textarea,
+a, i, ol, ul, li, form, label, footer, header,
+menu, nav, output, section, audio, video, button, input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;}
+
+button, input, textarea{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: inherit;
+}
+a{
+    text-decoration: none;
+    outline: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+ol, ul {
+    list-style: none;
+}

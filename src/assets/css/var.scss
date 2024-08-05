@@ -1,0 +1,44 @@
+$desktop-max: 1920px;
+$desktop: 1440px;
+$notebook: 1280px;
+$tablet-max: 1024px;
+$tablet: 768px;
+$mobile: 480px;
+
+:root {
+  /* T - thin, El - extra light, L - light, ... Bl - black */
+  /* SIZE GLOBAL  */
+
+  --margin-T: 8px; // 8 px
+  --margin-El: 16px;
+  --margin-L: 24px;
+  --margin-R: 32px;
+  --margin-M: 40px;
+  --margin-B: 56px;
+  --margin-Bl: 64px;
+
+  /* OUT */
+  --padding-Content: var(--margin-El)   ;
+
+  /* SIZE BLOCK */
+
+  /* FONT */
+
+  /* COLORS */
+  --color-white: #FBFBFB;
+
+  /* OTHER */
+
+
+  @media screen and (min-width: $tablet-max){
+    --color-white: #fff;
+    --width-Section: 960px;
+    --padding-Content: calc((100vw - var(--width-Section)) / 2 );
+  }
+
+  @media screen and (min-width: $notebook){
+    --width-Section: 1160px;
+  }
+}
+
+

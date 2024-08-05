@@ -1,0 +1,38 @@
+// pos > display > size > font > view > anim > other
+
+.content {
+  --size: 9vw;
+
+  position: relative;
+
+    font-family : CeraPro, sans-serif;
+
+    color: var(--color-white) ;
+    min-height: 110vh;
+    /* Vector */
+
+    background: linear-gradient(180deg, #ECF3DA 0%, #D7EAD9 10%),
+                linear-gradient(0deg, #ECF3DA 0%, #D7EAD9 10%);
+}
+
+
+
+
+
+@media only screen and (max-width : 768px) {
+
+}
+
+@media only screen and (max-width : 480px) {
+}
+
+
+
+
+
+
+
+
+
+
+
