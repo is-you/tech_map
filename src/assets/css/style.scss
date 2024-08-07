@@ -1,6 +1,6 @@
 // pos > display > size > font > view > anim > other
 
-.content {
+.root {
   --size: 9vw;
 
   position: relative;
@@ -8,13 +8,42 @@
     font-family : CeraPro, sans-serif;
 
     color: var(--color-white) ;
-    min-height: 110vh;
-    /* Vector */
-
-    background: linear-gradient(180deg, #ECF3DA 0%, #D7EAD9 10%),
-                linear-gradient(0deg, #ECF3DA 0%, #D7EAD9 10%);
+    height: 100vh;
+    overflow: hidden;
 }
 
+.content{
+  position: relative;
+
+  cursor: grab;
+  height: auto;
+
+  z-index: 1;
+}
+
+.social{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  background: linear-gradient(180deg, #ECF3DA 0%, #D7EAD9 10%),
+              linear-gradient(0deg, #ECF3DA 0%, #D7EAD9 10%);
+}
+
+.zoom_shade{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: grab;
+
+  &.js--zoom_mode{
+    z-index: 2;
+    cursor: grabbing;
+  }
+}
 
 
 

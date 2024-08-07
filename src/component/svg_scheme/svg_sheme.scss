@@ -1,6 +1,26 @@
-.svg_content{
+.scheme{
+  position: relative;
+
+  top: calc(80px + var(--size));
+
   text-rendering: optimizeSpeed;
   user-select: none;
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.svg_layer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  pointer-events: none;
+  user-select: none;
+}
+
+.svg_content{
 
   &--1{
     --color: #B2AF9B;
@@ -70,24 +90,7 @@
   letter-spacing:0.002em;
 }
 
-.scheme{
-  overflow: hidden;
 
-  padding: calc(var(--size) + 80px) 40px calc(var(--size) / 2) 40px;
-}
-
-.scheme_wrapper{
-  position: relative;
-}
-
-.svg_layer{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-
-  pointer-events: none;
-}
 
 .p{
   stroke: var(--color);
@@ -123,15 +126,4 @@
   fill: red;
 }
 
-.zoom_shade{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
 
-  .js--zoom_mode &{
-    z-index: 2;
-  }
-}

@@ -204,7 +204,7 @@ function js() {
 	const terser = require('gulp-terser');
 	return src(paths.js)
 		.pipe(concat('App.js'))
-		//.pipe(terser())
+		.pipe(terser())
 		.pipe(gulp.dest('./build/js/'))
 		.pipe(browserSync.stream());
 }

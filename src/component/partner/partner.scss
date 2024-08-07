@@ -2,6 +2,7 @@
   position: absolute;
   top: 0;
   left: 0;
+
   width: 100%;
 
   display: flex;
@@ -29,7 +30,12 @@
 
   &--bottom{
     top: auto;
+
     bottom: 0;
+    height: calc(var(--size) + 40px);
+
+    padding-top: 0;
+
   }
 }
 
@@ -37,6 +43,8 @@
   position: relative;
   width: var(--size);
   height: var(--size);
+
+  z-index: 2;
 
   &__btn{
     position: absolute;
