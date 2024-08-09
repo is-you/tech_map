@@ -15,6 +15,11 @@
   box-sizing: border-box;
   z-index: 2;
 
+  @media screen and (orientation: portrait) {
+    padding: 10px;
+    height: calc(var(--size) + 20px);
+  }
+
   &__group{
     display: flex;
     justify-content: space-between;
@@ -22,10 +27,17 @@
     height: var(--size);
     width: 32vw;
     box-sizing: border-box;
+
+    @media screen and (orientation: portrait) {
+      width: 47%;
+    }
   }
 
   &--small{
     --size: 7vw;
+    @media screen and (orientation: portrait) {
+        --size: 10vw;
+    }
   }
 
   &--bottom{
@@ -36,6 +48,10 @@
 
     padding-top: 0;
 
+    @media screen and (orientation: portrait) {
+      height: calc(var(--size) + 10px);
+      padding-top: 0;
+    }
   }
 }
 
@@ -50,6 +66,9 @@
 
   &__btn{
     position: absolute;
+    display: flex;
+    align-items: flex-start;
+
     top: 0;
     right: 0;
     width: 23px;

@@ -2,13 +2,15 @@ class SvgScheme {
     zoom_layer = document.querySelector('.js--zoom_zone');
     social = document.querySelector('.js--social');
     scheme = document.querySelector('.js--scheme');
+
     current_layer = null;
+
+    is_landscape = true;
 
     width = 0;
     current_width = 0;
     height = 0;
     current_height = 0;
-    additional_height_mod = 0.135; // 1.5 size
     additional_height = 0;
 
     max_x_shift = 0;
@@ -18,17 +20,34 @@ class SvgScheme {
 
     svg_ration = 0.615384;
     scale = 1;
+    min_scale = 1;
     current_pos = {
         x: 0, y: 0,
     };
 
     constructor() {
-        this.width = document.documentElement.clientWidth;
-        this.height = this.width * this.svg_ration;
+        this.is_landscape = document.documentElement.clientWidth > document.documentElement.clientHeight;
 
-        const screen_h = document.documentElement.clientHeight;
+        if (this.is_landscape) {
+            this.width = document.documentElement.clientWidth;
+            this.height = this.width * this.svg_ration;
+            this.additional_height = document.documentElement.clientWidth * 0.135 + 120;
 
-        this.additional_height = ((this.height - screen_h) + this.width * this.additional_height_mod + 120);
+            this.current_pos.y = (document.documentElement.clientWidth * 0.09 + 80) * -1;
+        } else {
+            // считаем ширину свг, получая из высоты
+            // высота = 100% высоты - высота парнеров(20 ширины) - отсуп партнером(30 пикселей)
+            this.height = document.documentElement.clientHeight - (document.documentElement.clientWidth * 0.2) - 30;
+            this.width = this.height * (1 / this.svg_ration);
+            this.additional_height = document.documentElement.clientWidth * 0.2 + 30;
+
+            this.current_pos.y = (document.documentElement.clientWidth * 0.1 + 20) * -1;
+        }
+
+        this.current_width = this.width * this.scale;
+        this.current_height = (this.scale === 1) ? this.height * this.scale : (this.height * this.scale) + (document.documentElement.clientWidth * 0.05);
+        this.max_y_shift = document.documentElement.clientHeight - this.current_height - this.additional_height;
+
 
         this.setSize();
         this.initEvents();
@@ -39,21 +58,29 @@ class SvgScheme {
         const current_shift_y = (this.current_pos.y === 0 && this.max_y_shift === 0) ? 0 : this.current_pos.y / this.max_y_shift;
 
         this.current_width = this.width * this.scale;
-        this.current_height = (this.scale === 1) ? this.height * this.scale : (this.height * this.scale) + (this.width * 0.05);
+        this.current_height = (this.scale === 1) ? this.height * this.scale : (this.height * this.scale) + (document.documentElement.clientWidth * 0.05);
 
-        const page_height = (this.current_height + 120 + (this.width * this.additional_height_mod));
+       //console.log(this.scale, 'current_height', this.current_height, 'this.additional_height', this.additional_height, this.current_height + this.additional_height - document.documentElement.clientHeight);
 
         this.scheme.style.width = this.current_width + 'px';
         this.scheme.style.height = this.current_height + 'px';
-        this.social.style.height = page_height + 'px';
+        this.social.style.height = (this.current_height + this.additional_height) + 'px';
 
-        this.current_pos.x = (this.current_width - this.width) * current_shift_x * -1;
-        this.current_pos.y = (this.current_height + this.additional_height - this.height) * current_shift_y * -1;
-        if (this.current_pos.y === 0 && this.max_y_shift === 0) this.current_pos.y = (80 + this.current_width * 0.09) * -1;
 
-        this.max_x_shift = (this.current_width - this.width) * -1;
-        this.max_y_shift = (this.current_height + this.additional_height - this.height) * -1;
+        console.log(document.documentElement.clientHeight, this.current_height, this.additional_height);
 
+        console.log(
+            'current_shift_x:', current_shift_x,
+            ' max_x_shift:', this.max_x_shift,
+            ' current_pos.x', this.current_pos.x);
+
+        this.current_pos.x = (document.documentElement.clientWidth - this.current_width) * current_shift_x;
+        this.current_pos.y = (document.documentElement.clientHeight - this.current_height - this.additional_height) * current_shift_y;
+
+        this.max_x_shift = document.documentElement.clientWidth - this.current_width;
+        this.max_y_shift = document.documentElement.clientHeight - this.current_height - this.additional_height;
+
+        console.log(document.documentElement.clientHeight, this.current_height, this.additional_height);
 
         console.log(
             'current_shift_y:', current_shift_y,
@@ -63,7 +90,6 @@ class SvgScheme {
 
         this.current_pos.x = (this.current_pos.x < this.max_x_shift) ? this.max_x_shift: this.current_pos.x;
         this.current_pos.y = (this.current_pos.y < this.max_y_shift) ? this.max_y_shift : this.current_pos.y;
-
 
         this.scheme.style.transform = `translate3d(${this.current_pos.x}px, ${this.current_pos.y}px, 0)`;
         this.social.style.transform = `translate3d(0px, ${this.current_pos.y}px, 0)`;

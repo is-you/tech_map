@@ -10,6 +10,10 @@
     color: var(--color-white) ;
     height: 100vh;
     overflow: hidden;
+
+  @media screen and (orientation: portrait) {
+    --size: 10vw;
+  }
 }
 
 .social{
@@ -17,6 +21,7 @@
   top: 0;
   left: 0;
   width: 100%;
+  min-height: 100vh;
 
   background: linear-gradient(180deg, #ECF3DA 0%, #D7EAD9 10%),
               linear-gradient(0deg, #ECF3DA 0%, #D7EAD9 10%);

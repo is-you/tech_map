@@ -2,6 +2,7 @@
   position: relative;
 
   top: calc(80px + var(--size));
+  min-height: calc(100vh - 20px - 20vw);
 
   text-rendering: optimizeSpeed;
   user-select: none;
@@ -10,6 +11,10 @@
   font-family: CeraPro, sans-serif;
 
   z-index: 1;
+
+  @media screen and (orientation: portrait) {
+    top: calc(20px + var(--size));
+  }
 }
 
 .svg_layer{
