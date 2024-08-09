@@ -47,15 +47,15 @@ class SvgScheme {
         this.current_width = this.width * this.scale;
         this.current_height = (this.scale === 1) ? this.height * this.scale : (this.height * this.scale) + (document.documentElement.clientWidth * 0.05);
         this.max_y_shift = document.documentElement.clientHeight - this.current_height - this.additional_height;
-
+        this.max_x_shift = document.documentElement.clientWidth - this.current_width;
 
         this.setSize();
         this.initEvents();
     }
 
     setSize() {
-        const current_shift_x = (this.current_pos.x === 0 && this.max_x_shift === 0) ? 0.5 : this.current_pos.x / this.max_x_shift;
-        const current_shift_y = (this.current_pos.y === 0 && this.max_y_shift === 0) ? 0 : this.current_pos.y / this.max_y_shift;
+        const current_shift_x = (this.max_x_shift === 0 || this.scale === 1) ? 0.5 : this.current_pos.x / this.max_x_shift;
+        const current_shift_y = (this.max_y_shift === 0) ? 0 : this.current_pos.y / this.max_y_shift;
 
         this.current_width = this.width * this.scale;
         this.current_height = (this.scale === 1) ? this.height * this.scale : (this.height * this.scale) + (document.documentElement.clientWidth * 0.05);
