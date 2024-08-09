@@ -77,6 +77,10 @@
 
     z-index: 3;
 
+    @media screen and (max-width: $tablet) {
+        display: none;
+    }
+
     &--close{
       padding: 5px;
       display: none;
