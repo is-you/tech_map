@@ -29,7 +29,7 @@
     box-sizing: border-box;
 
     @media screen and (orientation: portrait) {
-      width: 47%;
+      width: calc(50% - 5px);
     }
   }
 
