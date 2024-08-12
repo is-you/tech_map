@@ -128,6 +128,7 @@ class SvgScheme {
     initEvents() {
         this.scaleUp = this.scaleUp.bind(this);
         let init_coord = {x: 0, y: 0};
+        let current_coord = {x: 0, y: 0};
 
         let support_pointer = false;
 
@@ -152,6 +153,7 @@ class SvgScheme {
 
         const getCoord = (e) => {
            console.log(e.clientX);
+            console.log(e);
            return (e.clientX !== undefined) ?
                 {x: e.clientX, y: e.clientY} :
                 {x: e.touches[0].clientX, y: e.touches[0].clientY};
@@ -163,15 +165,13 @@ class SvgScheme {
             if (e.deltaY > 0) this.scaleDown();
         };
 
-
         const setPos = (e) => {
             if (!trembl) return;
             trembl = false;
             setTimeout(() => trembl = true, 40);
 
-            const coord = getCoord(e);
-            console.log('COORD', coord, init_coord);
-            const current_pos = getPos(coord);
+            current_coord = getCoord(e);
+            const current_pos = getPos(current_coord);
 
             console.log('MOVE', current_pos, this.current_pos.x, this.max_x_shift);
             this.scheme.style.transform = `translate3d(${current_pos.x}px, ${current_pos.y}px, 0)`;
@@ -184,8 +184,7 @@ class SvgScheme {
             this.move_mode = false;
             this.zoom_layer.classList.remove('js--zoom_mode');
 
-            const coord = getCoord(e);
-            this.current_pos = getPos(coord);
+            this.current_pos = getPos(current_coord);
 
             console.log('UP');
 
