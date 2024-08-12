@@ -153,8 +153,6 @@ class SvgScheme {
         };
 
         const getCoord = (e) => {
-           console.log(e.clientX);
-            console.log(e);
            return (e.clientX !== undefined) ?
                 {x: e.clientX, y: e.clientY} :
                 {x: e.touches[0].clientX, y: e.touches[0].clientY};
@@ -197,6 +195,13 @@ class SvgScheme {
             this.zoom_layer.removeEventListener('touchcancel', setPos);
         };
 
+        this.zoom_layer.addEventListener('click', (e) => {
+            document.querySelector('.js--log').innerHTML += 'zoom-layer - ' + e.target.className;
+        });
+        window.addEventListener('click', (e)=>{
+            document.querySelector('.js--log').innerHTML += ' , window - ' + e.target.className + '<br>';
+        });
+
         this.zoom_layer.addEventListener('dblclick', (e) => this.scaleUp());
         window.addEventListener('wheel', scale);
         window.addEventListener('touchmove', (e) => e.preventDefault(), {passive: false});
@@ -217,6 +222,7 @@ class SvgScheme {
             });
             return;
         }
+
         this.zoom_layer.addEventListener('pointerdown', (e) => {
             if (!e.isPrimary) return;
             support_pointer = true;
