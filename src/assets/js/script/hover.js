@@ -131,6 +131,9 @@ class SvgScheme {
 
         let trembl = true; // fix
 
+        let support_t = false;
+        let work_after = false;
+
         const getPos = (e) => {
             let x = this.current_pos.x + (e.clientX - init_coord.x);
             let y = this.current_pos.y + (e.clientY - init_coord.y);
@@ -156,6 +159,7 @@ class SvgScheme {
             if (!trembl) return;
             trembl = false;
             setTimeout(() => trembl = true, 30);
+            document.querySelector('.js--log').textContent = `after: ${work_after} \n support ${support_t}`;
 
             const current_pos = getPos(e);
             console.log('MOVE', current_pos, this.current_pos.x, this.max_x_shift);
@@ -179,6 +183,10 @@ class SvgScheme {
         this.zoom_layer.addEventListener('dblclick', (e) => this.scaleUp());
         window.addEventListener('wheel', scale);
         window.addEventListener('touchmove', (e) => {
+            work_after = true;
+            console.log('TOUCH MOVE');
+            document.querySelector('.js--log').innerHTML = `after: ${work_after} support: ${support_t}`;
+
             e.preventDefault();
         }, {passive: false});
 
@@ -187,9 +195,8 @@ class SvgScheme {
             console.log('DOWN');
             this.move_mode = true;
             this.zoom_layer.classList.add('js--zoom_mode');
-            setTimeout(() => {
-
-            }, 100);
+            support_t = true;
+            document.querySelector('.js--log').textContent = `after: ${work_after} \n support ${support_t}`;
 
             init_coord = {x: e.clientX, y: e.clientY};
 
