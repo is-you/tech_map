@@ -129,11 +129,15 @@ class SvgScheme {
         this.scaleUp = this.scaleUp.bind(this);
         let init_coord = {x: 0, y: 0};
 
+        let support_pointer = true;
+
         let trembl = true; // fix
 
-        const getPos = (e) => {
-            let x = this.current_pos.x + (e.clientX - init_coord.x);
-            let y = this.current_pos.y + (e.clientY - init_coord.y);
+        const getPos = (coord) => {
+            let x = this.current_pos.x + (coord.x - init_coord.x);
+            let y = this.current_pos.y + (coord.y - init_coord.y);
+
+            console.log(this.current_pos.x, coord.x, init_coord.x, (this.current_pos.x + (coord.x - init_coord.x)));
 
             x = (x > 0) ? 0 : x;
             x = (x < this.max_x_shift) ? this.max_x_shift : x;
@@ -146,17 +150,29 @@ class SvgScheme {
             };
         };
 
+        const getCoord = (e) => {
+           console.log(e.clientX);
+           return (e.clientX !== undefined) ?
+                {x: e.clientX, y: e.clientY} :
+                {x: e.touches[0].clientX, y: e.touches[0].clientY};
+        };
+
         const scale = (e) => {
             console.log(e.deltaY);
             if (e.deltaY < 0) this.scaleUp();
             if (e.deltaY > 0) this.scaleDown();
         };
 
+
         const setPos = (e) => {
             if (!trembl) return;
             trembl = false;
             setTimeout(() => trembl = true, 40);
-            const current_pos = getPos(e);
+
+            const coord = getCoord(e);
+            console.log('COORD', coord, init_coord);
+            const current_pos = getPos(coord);
+
             console.log('MOVE', current_pos, this.current_pos.x, this.max_x_shift);
             this.scheme.style.transform = `translate3d(${current_pos.x}px, ${current_pos.y}px, 0)`;
             this.social.style.transform = this.is_landscape ?
@@ -167,40 +183,53 @@ class SvgScheme {
         const endMove = (e) => {
             this.move_mode = false;
             this.zoom_layer.classList.remove('js--zoom_mode');
-            this.current_pos = getPos(e);
+
+            const coord = getCoord(e);
+            this.current_pos = getPos(coord);
+
             console.log('UP');
 
             this.zoom_layer.removeEventListener('pointercancel', endMove);
             this.zoom_layer.removeEventListener('pointerup', endMove);
             this.zoom_layer.removeEventListener('pointermove', setPos);
+            this.zoom_layer.removeEventListener('touchend', setPos);
+            this.zoom_layer.removeEventListener('touchmove', setPos);
+            this.zoom_layer.removeEventListener('touchcancel', setPos);
         };
 
         this.zoom_layer.addEventListener('dblclick', (e) => this.scaleUp());
         window.addEventListener('wheel', scale);
-        window.addEventListener('touchmove', (e) => {
-            console.log('TOUCH MOVE');
-            e.preventDefault();
-        }, {passive: false});
+        window.addEventListener('touchmove', (e) => e.preventDefault(), {passive: false});
 
         this.zoom_layer.addEventListener('pointerdown', (e) => {
-           // if (!e.isPrimary) return;
+            if (!e.isPrimary) return;
+            support_pointer = true;
             console.log('DOWN');
             document.querySelector('.js--log').textContent = `DOWN`;
 
             this.move_mode = true;
             this.zoom_layer.classList.add('js--zoom_mode');
 
-            init_coord = {x: e.clientX, y: e.clientY};
+            init_coord = getCoord(e);
 
             this.zoom_layer.addEventListener('pointercancel', endMove, {passive: true});
             this.zoom_layer.addEventListener('pointerup', endMove, {passive: true});
-            this.zoom_layer.addEventListener('pointermove', setPos, {passive: true});
+            this.zoom_layer.addEventListener('pointermove', setPos, {passive: false});
         });
 
         this.zoom_layer.addEventListener('touchstart', (e) => {
+            if (support_pointer) return;
             console.log('DOWN TOUCH');
             document.querySelector('.js--log').textContent = `DOWN TOUCH`;
 
+            this.move_mode = true;
+            this.zoom_layer.classList.add('js--zoom_mode');
+
+            init_coord = getCoord(e);
+
+            this.zoom_layer.addEventListener('touchcancel', endMove, {passive: true});
+            this.zoom_layer.addEventListener('touchend', endMove, {passive: true});
+            this.zoom_layer.addEventListener('touchmove', setPos, {passive: false});
         });
 
 
