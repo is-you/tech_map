@@ -29,7 +29,7 @@
     box-sizing: border-box;
 
     @media screen and (orientation: portrait) {
-      width: calc(50% - 5px);
+      width: 48.5%;
     }
   }
 
@@ -76,10 +76,6 @@
 
     z-index: 3;
 
-    @media screen and (max-width: $tablet) {
-        display: none;
-    }
-
     &--close{
       padding: 5px;
       display: none;
@@ -124,10 +120,17 @@
     &__token{
       font-size: 15px;
       margin-bottom: 15px;
+
+      @media screen and (max-width: $tablet) {
+          font-size: 14px;
+      }
     }
 
     &__about{
       font-size: 14px;
+      @media screen and (max-width: $tablet) {
+        font-size: 13px;
+      }
     }
   }
 
