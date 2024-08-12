@@ -60,7 +60,7 @@ class SvgScheme {
         this.current_width = this.width * this.scale;
         this.current_height = (this.scale === 1) ? this.height * this.scale : (this.height * this.scale) + (document.documentElement.clientWidth * 0.05);
 
-       //console.log(this.scale, 'current_height', this.current_height, 'this.additional_height', this.additional_height, this.current_height + this.additional_height - document.documentElement.clientHeight);
+        // console.log(this.scale, 'current_height', this.current_height, 'this.additional_height', this.additional_height, this.current_height + this.additional_height - document.documentElement.clientHeight);
 
         this.scheme.style.width = this.current_width + 'px';
         this.scheme.style.height = this.current_height + 'px';
@@ -88,7 +88,7 @@ class SvgScheme {
             ' current_pos.y', this.current_pos.y);
 
 
-        this.current_pos.x = (this.current_pos.x < this.max_x_shift) ? this.max_x_shift: this.current_pos.x;
+        this.current_pos.x = (this.current_pos.x < this.max_x_shift) ? this.max_x_shift : this.current_pos.x;
         this.current_pos.y = (this.current_pos.y < this.max_y_shift) ? this.max_y_shift : this.current_pos.y;
 
         this.scheme.style.transform = `translate3d(${this.current_pos.x}px, ${this.current_pos.y}px, 0)`;
@@ -120,7 +120,7 @@ class SvgScheme {
             let y = this.current_pos.y + (e.clientY - init_coord.y);
 
             x = (x > 0) ? 0 : x;
-            x = (x < this.max_x_shift) ? this.max_x_shift: x;
+            x = (x < this.max_x_shift) ? this.max_x_shift : x;
             y = (y > 0) ? 0 : y;
             y = (y < this.max_y_shift) ? this.max_y_shift : y;
 
@@ -130,14 +130,10 @@ class SvgScheme {
             };
         };
 
-        const endMove = (e) => {
-            this.move_mode = false;
-            this.zoom_layer.classList.remove('js--zoom_mode');
-            this.current_pos = getPos(e);
-            console.log('UP');
-
-            this.zoom_layer.removeEventListener('mouseup', endMove);
-            this.zoom_layer.removeEventListener('mousemove', setPos);
+        const scale = (e) => {
+            console.log(e.deltaY);
+            if (e.deltaY < 0) this.scaleUp();
+            if (e.deltaY > 0) this.scaleDown();
         };
 
         const setPos = (e) => {
@@ -145,21 +141,28 @@ class SvgScheme {
             trembl = false;
             setTimeout(() => trembl = true, 30);
 
-            const current_pos= getPos(e);
+            const current_pos = getPos(e);
             console.log('MOVE', current_pos, this.current_pos.x, this.max_x_shift);
             this.scheme.style.transform = `translate3d(${current_pos.x}px, ${current_pos.y}px, 0)`;
             this.social.style.transform = `translate3d(0px, ${current_pos.y}px, 0)`;
         };
 
-        const scale = (e) => {
-            console.log(e.deltaY);
-            if (e.deltaY < 0) this.scaleUp();
-            if (e.deltaY > 0) this.scaleDown();
+        const endMove = (e) => {
+            this.move_mode = false;
+            this.zoom_layer.classList.remove('js--zoom_mode');
+            this.current_pos = getPos(e);
+            console.log('UP');
+
+            this.zoom_layer.removeEventListener('pointercancel', endMove);
+            this.zoom_layer.removeEventListener('pointerup', endMove);
+            this.zoom_layer.removeEventListener('pointermove', setPos);
         };
+
 
         window.addEventListener('wheel', scale);
 
-        this.zoom_layer.addEventListener('mousedown', (e)=> {
+        this.zoom_layer.addEventListener('pointerdown', (e) => {
+            if (!e.isPrimary) return;
             console.log('DOWN');
             this.move_mode = true;
             this.zoom_layer.classList.add('js--zoom_mode');
@@ -169,8 +172,9 @@ class SvgScheme {
 
             init_coord = {x: e.clientX, y: e.clientY};
 
-            this.zoom_layer.addEventListener('mouseup', endMove);
-            this.zoom_layer.addEventListener('mousemove', setPos);
+            this.zoom_layer.addEventListener('pointercancel', endMove);
+            this.zoom_layer.addEventListener('pointerup', endMove);
+            this.zoom_layer.addEventListener('pointermove', setPos);
         });
 
         this.scheme.addEventListener('mousemove', (e) => {
