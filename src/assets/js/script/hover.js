@@ -51,6 +51,7 @@ class SvgScheme {
 
         this.setSize();
         this.initEvents();
+        this.loadImg();
     }
 
     setSize() {
@@ -70,6 +71,10 @@ class SvgScheme {
             this.social.style.width = this.scheme.style.width;
             this.social.style.setProperty('--size', ((this.current_width * 0.095) + 'px'));
             this.scheme.style.top = (this.current_width * 0.095 + 20) + 'px';
+        }
+
+        if (this.current_width > 3000) {
+            this.scheme.querySelector('.js--scheme_bg').style.backgroundImage = 'url(/img/svg_bg_hr.png)';
         }
 
         this.social.style.height = (this.current_height + this.additional_height) + 'px';
@@ -248,6 +253,12 @@ class SvgScheme {
         }
 
         return null;
+    }
+
+    loadImg() {
+        const src = `/img/svg_bg_hr.png`;
+        const temp_img = new Image();
+        temp_img.src = src;
     }
 }
 

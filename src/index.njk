@@ -177,11 +177,11 @@
                             <p><span>ИНН: </span>7813378916</p>
                         </div>
                     </div>
-                    <div href="https://adriver.ru/ " target="_blank" class="partner__content">
-                        <a href="" target="_blank" class="partner__logo">
+                    <a href="https://adriver.ru/" target="_blank" class="partner__content">
+                        <div class="partner__logo">
                             {% include 'assets/icon/logo_15.svg' %}
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="partner">
                     <button class="partner__btn js--partner-modal-toggle">{% include 'assets/icon/open.svg' %}</button>
@@ -211,11 +211,11 @@
                             <p><span>ИНН: </span>323408007697</p>
                         </div>
                     </div>
-                    <div class="partner__content">
-                        <a href="https://digitalbudget.ru " target="_blank" class="partner__logo">
+                    <a href="https://digitalbudget.ru" target="_blank" class="partner__content">
+                        <div  class="partner__logo">
                             {% include 'assets/icon/logo_11.svg' %}
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="partner">
                     <button class="partner__btn js--partner-modal-toggle">{% include 'assets/icon/open.svg' %}</button>
@@ -312,6 +312,7 @@
 
     <div class="scheme js--scheme">
 {#        {% include 'component/svg_scheme/layer_bg.njk' %}#}
+        <div class="scheme__bg js--scheme_bg"></div>
         {% include 'component/svg_scheme/layer_1.njk' %}
         {% include 'component/svg_scheme/layer_2.njk' %}
         {% include 'component/svg_scheme/layer_3.njk' %}
