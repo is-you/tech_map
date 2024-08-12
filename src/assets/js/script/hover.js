@@ -171,7 +171,7 @@ class SvgScheme {
             this.zoom_layer.removeEventListener('pointermove', setPos);
         };
 
-
+        this.zoom_layer.addEventListener('dblclick', (e) => this.scaleUp());
         window.addEventListener('wheel', scale);
         window.addEventListener('touchmove', (e) => {
             e.preventDefault();
