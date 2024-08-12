@@ -7,11 +7,11 @@
   text-rendering: optimizeSpeed;
   user-select: none;
   pointer-events: none;
-  touch-action: pan-x pan-y;
+  touch-action: none;
 
   font-family: CeraPro, sans-serif;
 
-  z-index: 1;
+  z-index: 2;
   outline: 2px blue;
 
   &__bg{
@@ -86,7 +86,8 @@
   white-space: pre;
   font-size:16.1px;
   letter-spacing:-0.002em;
-  z-index: 2;
+
+  touch-action: pan-x pan-y;
 }
 
 .number{

@@ -195,11 +195,12 @@ class SvgScheme {
             this.zoom_layer.removeEventListener('touchcancel', setPos);
         };
 
-        this.zoom_layer.addEventListener('click', (e) => {
-            document.querySelector('.js--log').innerHTML += 'zoom-layer - ' + e.target.className;
+        document.querySelector('.js--scale-up').addEventListener('click', (e) => {
+             this.scaleUp();
+
         });
-        window.addEventListener('click', (e)=>{
-            document.querySelector('.js--log').innerHTML += ' , window - ' + e.target.className + '<br>';
+        document.querySelector('.js--scale-down').addEventListener('click', (e) => {
+            this.scaleDown();
         });
 
         this.zoom_layer.addEventListener('dblclick', (e) => this.scaleUp());

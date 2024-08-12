@@ -62,6 +62,7 @@
   z-index: 2;
 
   pointer-events: auto;
+  touch-action: auto;
 
   &__btn{
     position: absolute;
