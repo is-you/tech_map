@@ -201,21 +201,21 @@ class SvgScheme {
         window.addEventListener('wheel', scale);
         window.addEventListener('touchmove', (e) => e.preventDefault(), {passive: false});
 
-        this.zoom_layer.addEventListener('pointerdown', (e) => {
-            if (!e.isPrimary) return;
-            support_pointer = true;
-            console.log('DOWN');
-            document.querySelector('.js--log').textContent = `DOWN`;
-
-            this.move_mode = true;
-            this.zoom_layer.classList.add('js--zoom_mode');
-
-            init_coord = getCoord(e);
-
-            this.zoom_layer.addEventListener('pointercancel', endMove, {passive: true});
-            this.zoom_layer.addEventListener('pointerup', endMove, {passive: true});
-            this.zoom_layer.addEventListener('pointermove', setPos, {passive: false});
-        });
+        // this.zoom_layer.addEventListener('pointerdown', (e) => {
+        //     if (!e.isPrimary) return;
+        //     support_pointer = true;
+        //     console.log('DOWN');
+        //     document.querySelector('.js--log').textContent = `DOWN`;
+        //
+        //     this.move_mode = true;
+        //     this.zoom_layer.classList.add('js--zoom_mode');
+        //
+        //     init_coord = getCoord(e);
+        //
+        //     this.zoom_layer.addEventListener('pointercancel', endMove, {passive: true});
+        //     this.zoom_layer.addEventListener('pointerup', endMove, {passive: true});
+        //     this.zoom_layer.addEventListener('pointermove', setPos, {passive: false});
+        // });
 
         this.zoom_layer.addEventListener('touchstart', (e) => {
             if (support_pointer) return;
