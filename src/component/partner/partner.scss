@@ -34,9 +34,8 @@
   }
 
   &--small{
-    --size: 7vw;
-    @media screen and (orientation: portrait) {
-        --size: 10vw;
+    @media screen and (orientation: landscape) {
+      --size: 7vw;
     }
   }
 
