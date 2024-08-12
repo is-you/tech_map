@@ -1,98 +1,104 @@
 // pos > display > size > font > view > anim > other
 
 .root {
-  --size: 9vw;
+  --size:      9vw;
 
-  position: relative;
+  position:    relative;
 
-    font-family : CeraPro, sans-serif;
+  font-family: CeraPro, sans-serif;
 
-    color: var(--color-white) ;
-    height: 100vh;
-    overflow: hidden;
+  color:       var(--color-white);
+  height:      100vh;
+  overflow:    hidden;
+
+  cursor:      grab;
+
+  box-sizing:  border-box;
+
+  &.js--zoom_mode {
+    cursor:  grabbing;
+  }
 
   @media screen and (orientation: portrait) {
     --size: 10vw;
   }
 }
 
-.social{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
+.social {
+  position:       fixed;
+  top:            0;
+  left:           0;
+  width:          100%;
+  min-height:     100vh;
 
-  background: linear-gradient(180deg, #ECF3DA 0%, #D7EAD9 10%),
-              linear-gradient(0deg, #ECF3DA 0%, #D7EAD9 10%);
+  background:     linear-gradient(180deg, #ECF3DA 0%, #D7EAD9 10%),
+                  linear-gradient(0deg, #ECF3DA 0%, #D7EAD9 10%);
 
-  z-index: 2;
+  z-index:        2;
   pointer-events: none;
-  touch-action: none;
+  touch-action:   none;
 }
 
-.zoom_shade{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  cursor: grab;
-  z-index: 2;
+.zoom_shade {
+  position:   fixed;
+  top:        0;
+  left:       0;
+  right:      0;
+  bottom:     0;
+  cursor:     grab;
+  z-index:    2;
 
   box-sizing: border-box;
 
-  &.js--zoom_mode{
+  .js--zoom_mode & {
     z-index: 3;
-    cursor: grabbing;
+    cursor:  grabbing;
   }
 
-  &__control{
-    display: none;
-    flex-direction: column;
+  &__control {
+    display:         none;
+    flex-direction:  column;
     justify-content: center;
-    gap: 5px;
+    gap:             5px;
 
-    position: fixed;
-    top: 50%;
-    right: 5px;
-    transform: translateY(-50%);
+    position:        fixed;
+    top:             50%;
+    right:           5px;
+    transform:       translateY(-50%);
 
-    z-index: 3;
+    z-index:         3;
 
     @media screen and (orientation: portrait) {
       display: flex;
     }
   }
 
-  &__btn{
-    display: flex;
+  &__btn {
+    display:         flex;
     justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    padding: 5px;
+    align-items:     center;
+    width:           40px;
+    height:          40px;
+    padding:         5px;
 
-    border-radius: 20px;
-    background: #fff;
-    box-shadow: 0px 4px 19px rgba(0, 0, 0, 0.3);
+    border-radius:   20px;
+    background:      #fff;
+    box-shadow:      0px 4px 19px rgba(0, 0, 0, 0.3);
 
-    box-sizing: border-box;
+    box-sizing:      border-box;
 
-    & svg{
+    & svg {
       width: 100%;
     }
   }
 }
 
 
-
-
-@media only screen and (max-width : 768px) {
+@media only screen and (max-width: 768px) {
 
 }
 
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width: 480px) {
 }
 
 

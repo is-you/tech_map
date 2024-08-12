@@ -197,7 +197,6 @@ class SvgScheme {
 
         document.querySelector('.js--scale-up').addEventListener('click', (e) => {
              this.scaleUp();
-
         });
         document.querySelector('.js--scale-down').addEventListener('click', (e) => {
             this.scaleDown();
