@@ -131,9 +131,6 @@ class SvgScheme {
 
         let trembl = true; // fix
 
-        let support_t = false;
-        let work_after = false;
-
         const getPos = (e) => {
             let x = this.current_pos.x + (e.clientX - init_coord.x);
             let y = this.current_pos.y + (e.clientY - init_coord.y);
@@ -158,9 +155,7 @@ class SvgScheme {
         const setPos = (e) => {
             if (!trembl) return;
             trembl = false;
-            setTimeout(() => trembl = true, 30);
-            document.querySelector('.js--log').textContent = `after: ${work_after} \n support ${support_t}`;
-
+            setTimeout(() => trembl = true, 40);
             const current_pos = getPos(e);
             console.log('MOVE', current_pos, this.current_pos.x, this.max_x_shift);
             this.scheme.style.transform = `translate3d(${current_pos.x}px, ${current_pos.y}px, 0)`;
@@ -183,20 +178,17 @@ class SvgScheme {
         this.zoom_layer.addEventListener('dblclick', (e) => this.scaleUp());
         window.addEventListener('wheel', scale);
         window.addEventListener('touchmove', (e) => {
-            work_after = true;
             console.log('TOUCH MOVE');
-            document.querySelector('.js--log').innerHTML = `after: ${work_after} support: ${support_t}`;
-
             e.preventDefault();
         }, {passive: false});
 
         this.zoom_layer.addEventListener('pointerdown', (e) => {
-            if (!e.isPrimary) return;
+           // if (!e.isPrimary) return;
             console.log('DOWN');
+            document.querySelector('.js--log').textContent = `DOWN`;
+
             this.move_mode = true;
             this.zoom_layer.classList.add('js--zoom_mode');
-            support_t = true;
-            document.querySelector('.js--log').textContent = `after: ${work_after} \n support ${support_t}`;
 
             init_coord = {x: e.clientX, y: e.clientY};
 
@@ -204,6 +196,13 @@ class SvgScheme {
             this.zoom_layer.addEventListener('pointerup', endMove, {passive: true});
             this.zoom_layer.addEventListener('pointermove', setPos, {passive: true});
         });
+
+        this.zoom_layer.addEventListener('touchstart', (e) => {
+            console.log('DOWN TOUCH');
+            document.querySelector('.js--log').textContent = `DOWN TOUCH`;
+
+        });
+
 
         this.scheme.addEventListener('mousemove', (e) => {
             if (this.move_mode) return;
