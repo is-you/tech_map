@@ -160,6 +160,9 @@ class SvgScheme {
 
 
         window.addEventListener('wheel', scale);
+        window.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, {passive: false});
 
         this.zoom_layer.addEventListener('pointerdown', (e) => {
             if (!e.isPrimary) return;
@@ -172,9 +175,9 @@ class SvgScheme {
 
             init_coord = {x: e.clientX, y: e.clientY};
 
-            this.zoom_layer.addEventListener('pointercancel', endMove);
-            this.zoom_layer.addEventListener('pointerup', endMove);
-            this.zoom_layer.addEventListener('pointermove', setPos);
+            this.zoom_layer.addEventListener('pointercancel', endMove, {passive: true});
+            this.zoom_layer.addEventListener('pointerup', endMove, {passive: true});
+            this.zoom_layer.addEventListener('pointermove', setPos, {passive: true});
         });
 
         this.scheme.addEventListener('mousemove', (e) => {
