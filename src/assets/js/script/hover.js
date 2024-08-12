@@ -219,7 +219,7 @@ class SvgScheme {
         this.zoom_layer.addEventListener('touchstart', (e) => {
             if (support_pointer) return;
             console.log('DOWN TOUCH');
-            document.querySelector('.js--log').textContent = `DOWN TOUCH`;
+            //document.querySelector('.js--log').textContent = `DOWN TOUCH`;
 
             this.move_mode = true;
             this.zoom_layer.classList.add('js--zoom_mode');
