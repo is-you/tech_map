@@ -129,7 +129,7 @@ class SvgScheme {
         this.scaleUp = this.scaleUp.bind(this);
         let init_coord = {x: 0, y: 0};
 
-        let support_pointer = true;
+        let support_pointer = false;
 
         let trembl = true; // fix
 
