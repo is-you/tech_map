@@ -205,7 +205,6 @@ class SvgScheme {
             this.zoom_layer.addEventListener('touchstart', (e) => {
                 if (support_pointer) return;
                 console.log('DOWN TOUCH');
-                //document.querySelector('.js--log').textContent = `DOWN TOUCH`;
 
                 this.move_mode = true;
                 this.zoom_layer.classList.add('js--zoom_mode');
@@ -214,7 +213,7 @@ class SvgScheme {
 
                 this.zoom_layer.addEventListener('touchcancel', endMove, {passive: true});
                 this.zoom_layer.addEventListener('touchend', endMove, {passive: true});
-                this.zoom_layer.addEventListener('touchmove', setPos, {passive: false});
+                this.zoom_layer.addEventListener('touchmove', setPos, {passive: true});
             });
             return;
         }
@@ -222,7 +221,6 @@ class SvgScheme {
             if (!e.isPrimary) return;
             support_pointer = true;
             console.log('DOWN');
-            document.querySelector('.js--log').textContent = `DOWN`;
 
             this.move_mode = true;
             this.zoom_layer.classList.add('js--zoom_mode');
@@ -231,11 +229,8 @@ class SvgScheme {
 
             this.zoom_layer.addEventListener('pointercancel', endMove, {passive: true});
             this.zoom_layer.addEventListener('pointerup', endMove, {passive: true});
-            this.zoom_layer.addEventListener('pointermove', setPos, {passive: false});
+            this.zoom_layer.addEventListener('pointermove', setPos, {passive: true});
         });
-
-
-
 
         this.scheme.addEventListener('mousemove', (e) => {
             if (this.move_mode) return;
