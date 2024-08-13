@@ -217,8 +217,8 @@ function watch() {
 	gulp.watch(paths.img, img);
 }
 
-gulp.task('build', parallel(css, js, html, img, fonts));
-//gulp.task('build', parallel(css, js, html, fonts));
+//gulp.task('build', parallel(css, js, html, img, fonts));
+gulp.task('build', parallel(css, js, html, fonts));
 gulp.task('font', fonts);
 gulp.task('css', css);
 gulp.task('img', img);
