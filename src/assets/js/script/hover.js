@@ -31,7 +31,7 @@ class SvgScheme {
         if (this.is_landscape) {
             this.width = document.documentElement.clientWidth;
             this.height = this.width * this.svg_ration;
-            this.additional_height = document.documentElement.clientWidth * 0.135 + 120;
+            this.additional_height = document.documentElement.clientWidth * 0.145 + 120;
 
             this.current_pos.y = (document.documentElement.clientWidth * 0.09 + 80) * -1;
         } else {
