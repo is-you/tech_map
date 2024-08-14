@@ -83,17 +83,13 @@
 
 
     &--close{
+      top: 5px;
       right: 5px;
       padding: 5px;
       display: none;
       box-sizing: border-box;
-      background-size: 70%;
+      background-size: 80%;
       background-image: url('data:image/svg+xml;utf8, <svg  viewBox="0 0 21 22"  xmlns="http://www.w3.org/2000/svg"> <rect x="0.0703125" y="19.9121" width="27" height="2.5" transform="rotate(-45 0.0703125 19.9121)" fill="%230E4A7D"/> <rect x="1.83789" y="0.820312" width="27" height="2.5" transform="rotate(45 1.83789 0.820312)" fill="%230E4A7D" /> </svg> ');
-
-      @media screen and (max-width: $desktop-middle) {
-        top: 5px;
-        background-size: 80%;
-      }
     }
 
     .active &{
