@@ -196,7 +196,7 @@ function html() {
 			{option: {}}
 		))
 		.pipe(rename({dirname: ''}))
-		.pipe(dest('./build/page/'))
+		.pipe(dest('./build/'))
 		.pipe(browserSync.stream());
 }
 

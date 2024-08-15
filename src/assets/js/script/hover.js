@@ -74,7 +74,7 @@ class SvgScheme {
         }
 
         if (this.current_width > 3000) {
-            this.scheme.querySelector('.js--scheme_bg').style.backgroundImage = 'url(/img/svg_bg_hr.png)';
+            this.scheme.querySelector('.js--scheme_bg').style.backgroundImage = 'url(../img/svg_bg_hr.png)';
         }
 
         this.social.style.height = (this.current_height + this.additional_height) + 'px';
@@ -110,6 +110,7 @@ class SvgScheme {
             `translate3d(0px, ${this.current_pos.y}px, 0)` :
             `translate3d(${this.current_pos.x}px, ${this.current_pos.y}px, 0)`;
     }
+
 
     scaleUp() {
         console.log('SCALE UP');
@@ -296,7 +297,7 @@ class SvgScheme {
     }
 
     loadImg() {
-        const src = `/img/svg_bg_hr.png`;
+        const src = `../img/svg_bg_hr.png`;
         const temp_img = new Image();
         temp_img.src = src;
     }
